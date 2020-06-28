@@ -1521,160 +1521,217 @@ ul.navbar-nav > li > a:focus {
 /*=======================================
     |   timeline css 
 =========================================*/
-  
+
+
+
+
 #timeline {
-    background: #474e5d;
-    font-family: Helvetica, sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
+  font-weight: 500;
+  color: #424949;
+  background-color: #ffffff;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 50px;
 }
-  
-  /* The actual timeline (the vertical ruler) */
-  .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
+
+#timeline h1 {
+  text-align: center;
+  height: 38px;
+  margin: 60px 0;
+}
+#timeline h1 span {
+  white-space: nowrap;
+}
+
+#timeline .flex-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 50px;
+}
+
+#timeline .input-flex-container {
+  padding-top: -40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  height: 50px;
+  max-width: 1000px;
+  position: relative;
+  z-index: 0;
+}
+
+#timeline .input {
+  width: 25px;
+  height: 25px;
+  background-color: #2C3E50;
+  position: relative;
+  border-radius: 50%;
+}
+#timeline .input:hover {
+  cursor: pointer;
+}
+#timeline .input::before, .input::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #2C3E50;
+  width: 4vw;
+  height: 5px;
+  max-width: 50px;
+}
+#timeline .input::before {
+  left: calc(-4vw + 12.5px);
+}
+#timeline .input::after {
+  right: calc(-4vw + 12.5px);
+}
+#timeline .input.active {
+  background-color: #2C3E50;
+}
+#timeline .input.active::before {
+  background-color: #2C3E50;
+}
+#timeline .input.active::after {
+  background-color: #AEB6BF;
+}
+#timeline .input.active span {
+  font-weight: 700;
+}
+#timeline .input.active span::before {
+  font-size: 13px;
+}
+#timeline .input.active span::after {
+  font-size: 15px;
+}
+#timeline .input.active ~ .input, .input.active ~ .input::before, .input.active ~ .input::after {
+  background-color: #AEB6BF;
+}
+#timeline .input span {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+#timeline .input span::before, .input span::after {
+  visibility: visible;
+  position: absolute;
+  left: 50%;
+}
+#timeline .input span::after {
+  content: attr(data-year);
+  top: 25px;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+#timeline .input span::before {
+  content: attr(data-info);
+  top: -65px;
+  width: 70px;
+  transform: translateX(-5px) rotateZ(-60deg);
+  font-size: 12px;
+  text-indent: -10px;
+}
+
+#timeline .description-flex-container {
+  width: 80vw;
+  font-weight: 400;
+  font-size: 22px;
+  margin-top: 100px;
+  max-width: 1000px;
+}
+#timeline .description-flex-container p {
+  margin-top: 0;
+  display: none;
+}
+#timeline .description-flex-container p.active {
+  display: block;
+  text-align: center;
+  font-size: larger;
+}
+
+@media (min-width: 1250px) {
+    #timeline .input::before {
+    left: -37.5px;
   }
-  
-  /* The actual timeline (the vertical ruler) */
-  .timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: white;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
+
+  #timeline .input::after {
+    right: -37.5px;
   }
-  
-  /* Container around content */
-.timeline .container1 {
-    box-sizing: border-box;
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
+}
+@media (max-width: 850px) {
+  #timeline .input {
+    width: 17px;
+    height: 17px;
   }
-  
-  /* The circles on the timeline */
-.timeline .container1::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -16px;
-    background-color: white;
-    border: 4px solid #FF9F55;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
+  #timeline .input::before, .input::after {
+    height: 3px;
   }
-  
-  /* Place the container to the left */
-  .left {
-    left: 0;
+  #timeline .input::before {
+    left: calc(-4vw + 8.5px);
   }
-  
-  /* Place the container to the right */
-  .right {
-    left: 50%;
+  #timeline .input::after {
+    right: calc(-4vw + 8.5px);
   }
-  
-  /* Add arrows to the left container (pointing right) */
-  .left::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    right: 30px;
-    border: medium solid white;
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent white;
+}
+@media (max-width: 600px) {
+    #timeline .flex-parent {
+    justify-content: initial;
   }
-  
-  /* Add arrows to the right container (pointing left) */
-  .right::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border: medium solid white;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-  }
-  
-/* Fix the circle for containers on the right side */
-.right::after {
-    left: -16px;
-  }
-  
-/* The actual content */
-.timeline .content {
-    padding: 20px 30px;
-    background-color: white;
-    position: relative;
-    border-radius: 6px;
-    border: 1px solid black;
-  }
-  
-  /* Media queries - Responsive timeline on screens less than 600px wide */
-@media screen and (max-width: 600px) {
-    /* Place the timelime to the left */
-    .timeline::after {
-    left: 31px;
-    }
-    
-    /* Full-width containers */
-    .timeline .container1 {
+
+  #timeline .input-flex-container {
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
-    padding-left: 70px;
-    padding-right: 25px;
-    }
-    
-    /* Make sure that all arrows are pointing leftwards */
-    .timeline .container1::before {
-    left: 60px;
-    border: medium solid white;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-    }
-  
-    /* Make sure all circles are at the same spot */
-    .left::after, .right::after {
-    left: 15px;
-    }
-    
-    /* Make all right containers behave like the left ones */
-    .right {
-    left: 0%;
-    }
+    height: auto;
+    margin-top: 15vh;
+  }
+
+  #timeline .input {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px 50px;
+    background-color: #AEB6BF;
+  }
+  #timeline .input::before, .input::after {
+    content: none;
+  }
+  #timeline .input span {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  #timeline .input span::before {
+    top: calc(100% + 5px);
+    transform: translateX(-50%);
+    text-indent: 0;
+    text-align: center;
+  }
+  #timeline .input span::after {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ECF0F1;
+  }
+
+  #timeline .description-flex-container {
+    margin-top: 30px;
+    text-align: center;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (max-width: 400px) {
+    #timeline {
+    min-height: 950px;
+  }
+}
